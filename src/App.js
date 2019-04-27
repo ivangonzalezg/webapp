@@ -7,7 +7,8 @@ import Admin from "./views/admin";
 import Login from "./views/home/login";
 import Register from "./views/home/register";
 import Proposals from "./views/admin/proposals";
-import Problematic from "./views/admin/problematic";
+import ProblematicAdmin from "./views/admin/problematic";
+import Problematic from "./views/problematics";
 import Footer from "./components/footer";
 import "./App.css";
 
@@ -23,7 +24,12 @@ export class App extends Component {
               <Route path="/admin" component={Admin} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
-              <Route path="/admin/problematics" component={Problematic} exact />
+              <Route path="/problematics/:id" component={Problematic} exact />
+              <Route
+                path="/admin/problematics"
+                component={ProblematicAdmin}
+                exact
+              />
               <Route path="/admin/proposals/:id" component={Proposals} exact />
               <Route component={NotFound} />
             </Switch>

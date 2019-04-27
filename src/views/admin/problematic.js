@@ -50,13 +50,7 @@ class Problematic extends Component {
 
   uploadImage(e) {
     const imageid = e.target.id;
-    const type = e.target.files[0].type.split("/")[0];
     const image = e.target.files[0];
-    if (type !== "image") {
-      alert("Just images accepted");
-      e.target.value = "";
-      return;
-    }
     const database = firebase.database().ref();
     const storage = firebase.storage().ref();
     const task = storage.child("problems").child(imageid);
@@ -113,7 +107,7 @@ class Problematic extends Component {
               onChange={e => this.handleChange(e)}
             />
           </Form.Group>
-          <Input type="file" className="file-admin" id="image1" onChange={this.uploadImage} />
+          <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image1" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
           <Card.Title>Problemático #2</Card.Title>
@@ -137,7 +131,7 @@ class Problematic extends Component {
               onChange={e => this.handleChange(e)}
             />
           </Form.Group>
-          <Input type="file" className="file-admin" id="image2" onChange={this.uploadImage} />
+          <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image2" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
           <Card.Title>Problemático #3</Card.Title>
@@ -161,7 +155,7 @@ class Problematic extends Component {
               onChange={e => this.handleChange(e)}
             />
           </Form.Group>
-          <Input type="file" className="file-admin" id="image3" onChange={this.uploadImage} />
+          <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image3" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
           <Card.Title>Problemático #4</Card.Title>
@@ -185,7 +179,7 @@ class Problematic extends Component {
               onChange={e => this.handleChange(e)}
             />
           </Form.Group>
-          <Input type="file" className="file-admin" id="image4" onChange={this.uploadImage} />
+          <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image4" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
           <Card.Title>Problemático #5</Card.Title>
@@ -209,11 +203,10 @@ class Problematic extends Component {
               onChange={e => this.handleChange(e)}
             />
           </Form.Group>
-          <Input type="file" className="file-admin" id="image5" onChange={this.uploadImage} />
-          <hr className="hr-admin" />
-
+          <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image5" onChange={this.uploadImage} />
+          <hr className="hr-admin" style={{visibility: "hidden"}} />
           <Button variant="success" type="submit" onClick={this.update}>
-            Iniciar
+            Subir cambios
           </Button>
         </Form>
       </Container>

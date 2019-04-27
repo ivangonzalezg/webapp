@@ -12,23 +12,61 @@ class Register extends Component {
       password: "",
       rpassword: "",
       message: "",
-      loading: false
+      socialId: 0,
+      name: "",
+      location: "",
+      loading: false,
+      socialsId: []
     };
+  }
+
+  componentDidMount() {
+    const users = firebase
+      .database()
+      .ref()
+      .child("users");
+    users.once("value").then(usersInfo => {
+      usersInfo.forEach(userInfo => {
+        const id = userInfo.toJSON().socialId;
+        this.setState(prevState => ({
+          socialsId: [...prevState.socialsId, id]
+        }));
+      });
+    });
   }
 
   register = e => {
     e.preventDefault();
-    console.log(this.state);
-    if (this.state.password === this.state.rpassword) {
-      const { email, password, name, socialId, location } = this.state;
+    const {
+      email,
+      password,
+      rpassword,
+      name,
+      socialId,
+      location,
+      socialsId
+    } = this.state;
+    if (socialId.toString().length < 7) {
+      this.setState({ message: "Número de cédula invalido" });
+      return;
+    }
+    if (socialsId !== []) {
+      for (let index = 0; index < socialsId.length; index++) {
+        if (socialsId[index] === socialId.toString()) {
+          this.setState({ message: "Número de cédula registrado" });
+          return;
+        }
+      }
+    }
+    if (password === rpassword) {
       this.setState({ message: "", loading: true });
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(event => {
           localStorage.setItem("userId", event.user.uid);
-          localStorage.setItem("userEmail", event.user.uid);
-          localStorage.setItem("userName", event.user.uid);
+          localStorage.setItem("userEmail", email);
+          localStorage.setItem("userName", name);
           const user = firebase
             .database()
             .ref()
@@ -73,19 +111,19 @@ class Register extends Component {
         <br />
         <h1>
           <center>Crea tu cuenta</center>
+          <br />
         </h1>
-        <br />
-        <div id="form-register">
+        <div id="form-user">
           <Form onSubmit={!this.state.loading ? e => this.register(e) : null}>
             <Form.Label>Ingrese correo electrónico</Form.Label>
-            <Form.Group controlId="email-testamento">
+            <Form.Group controlId="email-barranquilla">
               <Form.Control
                 type="email"
                 onChange={event => this.setState({ email: event.target.value })}
                 required
               />
             </Form.Group>
-            <Form.Group controlId="password-testamento">
+            <Form.Group controlId="password-barranquilla">
               <Form.Label>Ingrese contraseña</Form.Label>
               <Form.Control
                 type="password"

@@ -54,14 +54,15 @@ class Home extends React.Component {
         var {description1,description2,description3,description4,description5 } = this.state;
         var {image1,image2,image3,image4,image5 } = this.state;
         return (
-            <div>
+            <div className="container-problematics">
+                <center><h1>Principales problemáticas de la ciudad</h1></center>
                 <Container>
                     <Row>
-                        <Col><Target info={{ name: name1, description: description1, image: image1 }} /></Col>
-                        <Col><Target info={{ name: name2, description: description2, image: image2 }} /></Col>
-                        <Col><Target info={{ name: name3, description: description3, image: image3 }} /></Col>
-                        <Col><Target info={{ name: name4, description: description4, image: image4 }} /></Col>
-                        <Col><Target info={{ name: name5, description: description5, image: image5 }} /></Col>
+                        <Col><Target info={{ name: name1, description: description1, image: image1, id: 1 }} /></Col>
+                        <Col><Target info={{ name: name2, description: description2, image: image2, id: 2 }} /></Col>
+                        <Col><Target info={{ name: name3, description: description3, image: image3, id: 3 }} /></Col>
+                        <Col><Target info={{ name: name4, description: description4, image: image4, id: 4 }} /></Col>
+                        <Col><Target info={{ name: name5, description: description5, image: image5, id: 5 }} /></Col>
                     </Row>
                 </Container>
             </div>

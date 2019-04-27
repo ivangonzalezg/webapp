@@ -1,13 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-export class index extends Component {
+class Problematics extends Component {
+  constructor() {
+    super();
+
+    this.state = {};
+  }
+
+  componentDidMount() {
+    this.setState({
+      currentyId: this.props.match.params.id
+    });
+  }
+
   render() {
     return (
       <div>
-        
+        <p>{this.state.currentyId}</p>
       </div>
-    )
+    );
   }
 }
 
-export default index;
+export default Problematics;
