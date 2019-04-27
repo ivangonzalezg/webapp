@@ -55,13 +55,13 @@ class Home extends React.Component {
         var {image1,image2,image3,image4,image5 } = this.state;
         return (
             <div>
-                <Container className="conta">
+                <Container>
                     <Row>
                         <Col><Target info={{ name: name1, description: description1, image: image1 }} /></Col>
                         <Col><Target info={{ name: name2, description: description2, image: image2 }} /></Col>
                         <Col><Target info={{ name: name3, description: description3, image: image3 }} /></Col>
                     </Row>
-                    <Row>
+                    <Row className = "row2">
                         <Col><Target info={{ name: name4, description: description4, image: image4 }} /></Col>
                         <Col><Target info={{ name: name5, description: description5, image: image5 }} /></Col>
                     </Row>
