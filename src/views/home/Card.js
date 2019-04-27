@@ -23,11 +23,12 @@ function MediaCard(props) {
   const { info } = props;  
   return (
     <Card className={classes.card}>
+    <a href={"/"+info.name.toLowerCase()}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={info.image}
-          title={info.title}
+          title={info.name}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -38,6 +39,7 @@ function MediaCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
+      </a>
       <CardActions>
         <Button size="small" color="primary">
           Compartir
