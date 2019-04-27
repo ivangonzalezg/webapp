@@ -1,12 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.css";
+import * as firebase from "firebase";
+
+var config = {
+  apiKey: "AIzaSyB3EP--traMfKljj3siKhCj5b0fHMwea94",
+  authDomain: "hackthon-23b1d.firebaseapp.com",
+  databaseURL: "https://hackthon-23b1d.firebaseio.com",
+  projectId: "hackthon-23b1d",
+  storageBucket: "hackthon-23b1d.appspot.com",
+  messagingSenderId: "486174546311"
+};
+firebase.initializeApp(config);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
