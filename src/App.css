@@ -33,3 +33,12 @@ body {
 .row2{
   padding-top: 20px
 }
+.conta {
+  margin-top: 10px;
+  border: 10px;
+  padding: 10px;
+}
+
+.file-admin {
+  width: 100%;
+}

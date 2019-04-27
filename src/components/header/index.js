@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 class Header extends Component {
   constructor(props) {
@@ -8,9 +8,6 @@ class Header extends Component {
     this.state = {};
   }
 
-  search(e) {
-    e.preventDefault();
-  }
   render() {
     return (
       <Navbar bg="light" expand="lg">
@@ -31,14 +28,6 @@ class Header extends Component {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form inline onSubmit={e => this.search(e)}>
-            <FormControl
-              type="text"
-              placeholder="Busca una propuesta"
-              className="mr-sm-2"
-            />
-            <Button variant="outline-dark">Buscar</Button>
-          </Form>
         </Navbar.Collapse>
       </Navbar>
     );
