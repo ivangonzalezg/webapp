@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, ButtonGroup, Button } from "react-bootstrap";
 
 class Header extends Component {
   constructor(props) {
@@ -28,6 +28,10 @@ class Header extends Component {
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <ButtonGroup>
+            <Button href="/login" variant="light">Iniciar sesión</Button>
+            <Button href="/register" variant="light">Registrarse</Button>
+          </ButtonGroup>
         </Navbar.Collapse>
       </Navbar>
     );
