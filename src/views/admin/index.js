@@ -17,7 +17,12 @@ class Admin extends Component {
       description2: "",
       description3: "",
       description4: "",
-      description5: ""
+      description5: "",
+      image1: "",
+      image2: "",
+      image3: "",
+      image4: "",
+      image5: ""
     };
   }
 
@@ -28,7 +33,6 @@ class Admin extends Component {
       .once("value")
       .then(data => {
         const dbinfo = data.toJSON();
-        console.log(data.toJSON());
         for (let index = 1; index < 6; index++) {
           this.setState({
             ["name" + index]: dbinfo["name" + index],
@@ -42,16 +46,46 @@ class Admin extends Component {
     console.log(this.state);
   };
 
-  update(e) {
-    e.preventDefault();
+  update = () => {
     var database = firebase.database().ref();
     var tempObject = {};
     for (let index = 1; index < 6; index++) {
       tempObject["name" + index] = this.state["name" + index];
       tempObject["description" + index] = this.state["description" + index];
+      tempObject["image" + index] = this.state["image" + index];
     }
-    database.child("problems").set(tempObject);
+    database.child("problems").update(tempObject);
     window.location.reload();
+  };
+
+  uploadImage(e) {
+    const imageid = e.target.id;
+    const type = e.target.files[0].type.split("/")[0];
+    const image = e.target.files[0];
+    if (type !== "image") {
+      alert("Just images accepted");
+      e.target.value = "";
+      return;
+    }
+    const database = firebase.database().ref();
+    const storage = firebase.storage().ref();
+    const task = storage.child("problems").child(imageid);
+    task.put(image).on(
+      "state_changed",
+      () => {},
+      function(error) {},
+      async function() {
+        task.getDownloadURL().then(url => {
+          database.child("problems").update({
+            [imageid]: url
+          });
+        });
+      }
+    );
+  }
+
+  notSubmit(e) {
+    e.preventDefault();
   }
 
   handleChange(e) {
@@ -67,7 +101,7 @@ class Admin extends Component {
           <h1>Actualiza las problematicas</h1>
         </center>
         <br />
-        <Form onSubmit={e => this.update(e)}>
+        <Form onSubmit={e => this.notSubmit(e)}>
           <Card.Title>Problemático #1</Card.Title>
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
@@ -89,15 +123,9 @@ class Admin extends Component {
               onChange={e => this.handleChange(e)}
             />
           </Form.Group>
-          <Input
-            type="file"
-            id="iam"
-            className="attachInput-configure"
-            onChange={this.uploadButtonState}
-            disabled={this.state.filesSize === -1}
-          />
+          <Input type="file" id="image1" onChange={this.uploadImage} />
           <hr className="hr-admin" />
-          <Button variant="success" type="submit">
+          <Button variant="success" type="submit" onClick={this.update}>
             Iniciar
           </Button>
         </Form>
