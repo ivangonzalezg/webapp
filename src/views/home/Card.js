@@ -20,16 +20,14 @@ const styles = {
 
 function MediaCard(props) {
   const { classes } = props;
-  const { info } = props;
-  console.log(info)
-  
+  const { info } = props;  
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image={info.image}
-          title="Contemplative Reptile"
+          title={info.title}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -42,10 +40,10 @@ function MediaCard(props) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          Compartir
         </Button>
         <Button size="small" color="primary">
-          Learn More
+          Saber más
         </Button>
       </CardActions>
     </Card>
