@@ -67,6 +67,8 @@ class Register extends Component {
           localStorage.setItem("userId", event.user.uid);
           localStorage.setItem("userEmail", email);
           localStorage.setItem("userName", name);
+          localStorage.setItem("userLocation", location);
+          localStorage.setItem("userSocialId", socialId);
           const user = firebase
             .database()
             .ref()
