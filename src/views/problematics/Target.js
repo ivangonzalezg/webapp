@@ -19,14 +19,9 @@ import QuestionAnswerOutlined from '@material-ui/icons/QuestionAnswerOutlined';
 class DetailedExpansionPanel extends React.Component {
     state = {
         like: true,
-        info: [],
-        body: ""
-    }
-    componentWillMount() {
-        console.log("props: ", this.props)
-        this.setState({
-            info: this.props.info
-        });
+        info: this.props.info,
+        body: "",
+        currentyId : this.props.currentyId
     }
     update = () => {
         var database = firebase.database().ref();
@@ -35,11 +30,9 @@ class DetailedExpansionPanel extends React.Component {
         const userId = localStorage.getItem("userId");
         const tempObject = { [date]: { body, userId } };
         database
-            .child("survey")
+            .child("proposals")
+            .child(this.state.currentyId)
             .update(tempObject)
-            .then(() => {
-                window.location.pathname = "/";
-            });
     };
 
     render() {
@@ -68,16 +61,14 @@ class DetailedExpansionPanel extends React.Component {
                                     <Image width="180px" src={this.state.info.image ? this.state.info.image : "https://ep01.epimg.net/internacional/imagenes/2018/07/23/billete_a_macondo/1532310440_143390_1532310884_noticia_normal_recorte1.jpg"} rounded />
                                 </Col>
                                 <Col>
-                                    <Container>
-                                        <Row>
-                                            <h1>
-                                                {this.state.info.title}
-                                            </h1>
-                                        </Row>
-                                        <Row>
-                                            {this.state.info.body}
-                                        </Row>
-                                    </Container>
+                                    <Row>
+                                        <h1>
+                                            {this.state.info.title}
+                                        </h1>
+                                    </Row>
+                                    <Row>
+                                        {this.state.info.body}
+                                    </Row>
                                 </Col>
                             </Row>
                             <Row>
@@ -92,8 +83,8 @@ class DetailedExpansionPanel extends React.Component {
                                         {this.state.like ? (
                                             <ThumbDownOutlined />
                                         ) : (
-                                                <ThumbDown />
-                                            )}
+                                            <ThumbDown />
+                                        )}
                                     </Button>
                                 </Col>
                             </Row>
@@ -116,9 +107,9 @@ class DetailedExpansionPanel extends React.Component {
                     </ExpansionPanelDetails>
                     <Divider />
                     <ExpansionPanelActions>
-                        <Button size="small" color="primary" onClick={this.update()}>
+                        <Button size="small" color="primary" >
                             Guardar
-              </Button>
+                        </Button>
                     </ExpansionPanelActions>
                 </ExpansionPanel>
             </div>

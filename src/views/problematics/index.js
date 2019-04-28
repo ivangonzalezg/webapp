@@ -55,7 +55,7 @@ class Problematics extends Component {
     var card = this.state.data.map((dato, i) => {
       return (
         <div key={i}>
-          <Target info={dato} />
+          <Target info={dato} currentyId={this.state.currentyId}/>
         </div>
       );
     });
