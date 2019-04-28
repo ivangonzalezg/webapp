@@ -35,12 +35,11 @@ export class App extends Component {
               <Route path="/survey" component={Prioritize} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
+              <Route path="/problematics/create/:id" component={CreateProposals} exact />
               <Route path="/problematics/:id" component={Problematic} exact />
               <Route path="/problematics/:id/:reference" component={Proposals} exact />
               <Route path="/admin/proposals/:id" component={ProposalsAdmin} exact />
               <Route path="/admin/problematics" component={ProblematicAdmin} exact />
-              {userEmail && userId && userName && userSocialId && userLocation &&
-              <Route path="/problematics/create/:id" component={CreateProposals} exact />}
               <Route component={NotFound} />
             </Switch>
           </div>

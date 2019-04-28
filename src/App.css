@@ -115,8 +115,25 @@ body {
   cursor: default;
 }
 
+.welcome-header-others {
+  color: black;
+}
+
+.welcome-header-others:hover {
+  cursor: default;
+  color: black !important;
+}
+
 .logout-header:hover {
   color: grey !important;
+}
+
+.logout-header-others {
+  color: black;
+}
+
+.logout-header-others:hover {
+  color: gray;
 }
 
 .welcome-header,

@@ -54,7 +54,7 @@ class Proposals extends Component {
       .then(() => {
         console.log("Subido");
       });
-    /*window.location.reload();*/
+    window.location.pathname = "/problematics/" + currentyId;
   };
 
   render() {

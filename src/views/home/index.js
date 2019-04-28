@@ -70,6 +70,11 @@ class Home extends React.Component {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
+                <Nav.Link href="/" className="logout-header">
+                  Inicio
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
                 <Nav.Link onClick={this.logout} className="logout-header">
                   Cerrar sesión
                 </Nav.Link>
