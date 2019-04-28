@@ -19,37 +19,39 @@ import QuestionAnswerOutlined from '@material-ui/icons/QuestionAnswerOutlined';
 class DetailedExpansionPanel extends React.Component {
     state = {
         like: false,
-        numLike : Number,
-        userName : false,
+        numLike: 0,
+        userName: false,
         dislike: true,
-        numDislike : Number,
+        numDislike: 0,
         info: this.props.info,
-        comments : [],
+        comments: [],
         body: "",
-        proposalId : this.props.info.id,
+        i : 0,
+        proposalId: this.props.info.id,
         currentyId: this.props.currentyId
     }
-    componentWillMount(){
+    componentWillMount() {
         const userName = localStorage.getItem("userId");
-        this.setState({userName})
-        if(this.props.info.actions){
+        this.setState({ userName })
+        if (this.props.info.actions) {
             this.setState({
-                numLike : this.props.info.actions.like,
-                numDislike : this.props.info.actions.dislike,
+                numLike: this.props.info.actions.like,
+                numDislike: this.props.info.actions.dislike,
             })
         }
-        if(this.props.info.comments){
+        if (this.props.info.comments) {
             const comments = this.props.info.comments;
             const datos = [{}];
             var i = 0;
             for (var key in comments) {
                 for (var key1 in comments[key]) {
-                    datos[i] = {name:key1, date: key, body:comments[key][key1] }
+                    datos[i] = { name: key1, date: key, body: comments[key][key1] }
                 }
                 i += 1;
             }
             this.setState({
-                comments: datos
+                comments: datos,
+                i
             });
             console.log("datos:  ", datos)
         }
@@ -59,15 +61,19 @@ class DetailedExpansionPanel extends React.Component {
         const date = new Date().getTime();
         const { body } = this.state;
         const name = localStorage.getItem("userName");
-        const tempObject = {[date]:{[name]:body}};
-        const actions = {like:this.state.like};
-        console.log("database: ",this.state.proposalId)
-        database
-            .child("proposals")
-            .child(this.state.currentyId)
-            .child(this.state.proposalId)
-            .child("comments")
-            .update(tempObject)
+        const tempObject = { [date]: { [name]: body } };
+        const actions = { like: this.state.numLike, disLike:this.state.numDislike };
+        console.log("database: ", this.state.proposalId)
+        if(body!==""){
+            database
+                .child("proposals")
+                .child(this.state.currentyId)
+                .child(this.state.proposalId)
+                .child("comments")
+                .update(tempObject)
+                this.state.comments.push({ name: name, date: date, body: body })
+                this.setState({});
+        }
         database
             .child("proposals")
             .child(this.state.currentyId)
@@ -75,38 +81,70 @@ class DetailedExpansionPanel extends React.Component {
             .child("actions")
             .update(actions)
 
-        this.state.comments.push({name:name, date:date, body:body})
-        this.setState({});
+        
+        this.onClickMessages();
     };
+    onClickVotes(){
+        const counters = firebase
+            .database()
+            .ref()
+            .child("counters");
+        counters
+            .child("votes")
+            .once("value")
+            .then(data => {
+                counters.update({ votes: data.val() + 1 }).then(() => {
+                    this.setState({  });
+                });
+            });
+    }
+    onClickMessages(){
+        const counters = firebase
+            .database()
+            .ref()
+            .child("counters");
+        counters
+            .child("comments")
+            .once("value")
+            .then(data => {
+                counters.update({ comments: data.val() + 1 }).then(() => {
+                    this.setState({  });
+                });
+            });
+    }
     onClick(k) {
-        if(this.state.userName){
+        if (this.state.userName) {
             this.update();
-        }else{
+        } else {
             window.location.pathname = "/login";
         }
     }
-    onClickActions(k){
-        if(this.state.userName){
-            if(k){
-                if(this.state.like !== this.state.dislike){
-                    this.setState({ 
-                        like: this.state.dislike,
-                    })
-                } 
-                this.setState({ 
-                    dislike: !this.state.dislike 
-                })                                  
-            }else{
-                if(this.state.dislike !== this.state.like ){
-                    this.setState({ 
-                        dislike: this.state.like ,
+    onClickActions(k) {
+        if (this.state.userName) {
+            if (k) {
+                if (this.state.like !== this.state.dislike) {
+                    this.setState({
+                        like: this.state.dislike
                     })
                 }
-                this.setState({ 
+                this.setState({
+                    dislike: !this.state.dislike,
+                    numDislike : this.state.numDislike + 1
+                })
+                this.onClickVotes();
+            } else {
+                if (this.state.dislike !== this.state.like) {
+                    this.setState({
+                        dislike: this.state.like
+                    })
+                }
+                this.setState({
                     like: !this.state.like,
-                }
-            )}            
-        }else{
+                    numLike : this.state.numLike + 1
+                })
+                this.onClickVotes();
+            }
+        } else {
             window.location.pathname = "/login";
         }
     }
@@ -134,11 +172,11 @@ class DetailedExpansionPanel extends React.Component {
                                         <Col></Col>
                                         <Col></Col>
                                         <Col>
-                                            <QuestionAnswerOutlined />                                        
+                                            {this.state.i} <QuestionAnswerOutlined />
                                         </Col><Col>
                                             {this.state.numDislike} {this.state.dislike ? <ThumbUpOutlined /> : <ThumbUp />}
                                         </Col><Col>
-                                            {this.state.numLike}{this.state.like ? <ThumbDownOutlined /> : <ThumbDown />}                                            
+                                            {this.state.numLike}{this.state.like ? <ThumbDownOutlined /> : <ThumbDown />}
                                         </Col>
                                     </Row>
                                 </Col>
