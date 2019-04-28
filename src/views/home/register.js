@@ -82,7 +82,7 @@ class Register extends Component {
               location
             })
             .then(() => {
-              window.location.pathname = "/newuser";
+              window.location.pathname = "/survey";
               this.setState({ loading: false });
             });
         })

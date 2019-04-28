@@ -1,16 +1,18 @@
 import React, { Component } from "react";
-import { Container, Alert } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import * as firebase from "firebase";
 import Loading from ".././../components/loading";
-import ArrowDown from "@material-ui/icons/ArrowDownwardRounded";
-import ArrowUp from "@material-ui/icons/ArrowUpwardRounded";
 
 class Prioritize extends Component {
   constructor() {
     super();
 
     this.state = {
-      status: false
+      status: false,
+      first: "",
+      second: "",
+      third: "",
+      message: ""
     };
   }
 
@@ -30,28 +32,31 @@ class Prioritize extends Component {
       });
   }
 
-  handleChangeUp(e) {
-    const id = parseInt(e.target.id);
-    const temp = this.state["name" + id];
-    const tempNext = this.state["name" + (id - 1)];
+  sendSurvey = e => {
+    e.preventDefault();
     this.setState({
-      ["name" + id]: tempNext,
-      ["name" + (id - 1)]: temp
+      message: ""
     });
-  }
-
-  handleChangeDown(e) {
-    const id = parseInt(e.target.id);
-    const temp = this.state["name" + id];
-    const tempNext = this.state["name" + (id + 1)];
-    this.setState({
-      ["name" + id]: tempNext,
-      ["name" + (id + 1)]: temp
-    });
-  }
+    const { first, second, third } = this.state;
+    if (first === second || second === third || third === first) {
+      this.setState({
+        message: "No puede tener opciones repetidas"
+      });
+      return;
+    }
+    var database = firebase.database().ref();
+    const date = new Date().getTime();
+    const tempObject = { [date]: [first, second, third] };
+    database
+      .child("survey")
+      .update(tempObject)
+      .then(() => {
+        window.location.pathname = "/";
+      });
+  };
 
   render() {
-    var { name1, name2, name3, name4, name5 } = this.state;
+    const { name1, name2, name3, name4, name5, message } = this.state;
     return (
       <Container>
         <center>
@@ -62,77 +67,65 @@ class Prioritize extends Component {
         <br />
         {this.state.status ? (
           <div>
-            <Alert variant="danger">
-              {name1}
-              <ArrowDown
-                id="1"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeDown(e);
-                }}
-              />
-            </Alert>
-            <Alert variant="warning">
-              {name2}
-              <ArrowUp
-                id="2"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeUp(e);
-                }}
-              />
-              <ArrowDown
-                id="2"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeDown(e);
-                }}
-              />
-            </Alert>
-            <Alert variant="warning">
-              {name3}
-              <ArrowUp
-                id="3"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeUp(e);
-                }}
-              />
-              <ArrowDown
-                id="3"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeDown(e);
-                }}
-              />
-            </Alert>
-            <Alert variant="primary">
-              {name4}
-              <ArrowUp
-                id="4"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeUp(e);
-                }}
-              />
-              <ArrowDown
-                id="4"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeDown(e);
-                }}
-              />
-            </Alert>
-            <Alert variant="success">
-              {name5}
-              <ArrowUp
-                id="5"
-                className="arrow-survey"
-                onClick={e => {
-                  this.handleChangeUp(e);
-                }}
-              />
-            </Alert>
+            <Form
+              onSubmit={!this.state.loading ? e => this.sendSurvey(e) : null}
+            >
+              <Form.Group>
+                <Form.Label>Principal prioridad</Form.Label>
+                <Form.Control
+                  required
+                  as="select"
+                  onChange={event =>
+                    this.setState({ first: event.target.value })
+                  }
+                >
+                  <option />
+                  <option>{name1}</option>
+                  <option>{name2}</option>
+                  <option>{name3}</option>
+                  <option>{name4}</option>
+                  <option>{name5}</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Mediana prioridad</Form.Label>
+                <Form.Control
+                  required
+                  as="select"
+                  onChange={event =>
+                    this.setState({ second: event.target.value })
+                  }
+                >
+                  <option />
+                  <option>{name1}</option>
+                  <option>{name2}</option>
+                  <option>{name3}</option>
+                  <option>{name4}</option>
+                  <option>{name5}</option>
+                </Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Baja prioridad</Form.Label>
+                <Form.Control
+                  required
+                  as="select"
+                  onChange={event =>
+                    this.setState({ third: event.target.value })
+                  }
+                >
+                  <option />
+                  <option>{name1}</option>
+                  <option>{name2}</option>
+                  <option>{name3}</option>
+                  <option>{name4}</option>
+                  <option>{name5}</option>
+                </Form.Control>
+              </Form.Group>
+              <center>
+                <span>{message}</span>
+              </center>
+              <Button type="submit">Enviar información</Button>
+            </Form>
           </div>
         ) : (
           <div style={{ paddingTop: "5%" }}>
