@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Container, Col, Row } from "react-bootstrap";
-import Target from "./Card";
+import Target from "./Target";
 import * as firebase from "firebase";
+import Button from '@material-ui/core/Button';
 
 class Problematics extends Component {
   constructor(props) {
@@ -9,10 +10,10 @@ class Problematics extends Component {
 
     this.state = {
       currentyId: Number,
-      data: [{}]
+      data: []
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     var database = firebase.database().ref();
     const currentyId = this.props.match.params.id;
     database
@@ -45,10 +46,12 @@ class Problematics extends Component {
         this.setState({
           data: datos
         });
+        console.log("s: ",this.state.data)
       });
   }
 
   render() {
+      console.log("info: ",this.state.data)
     var card = this.state.data.map((dato, i) => {
       return (
         <div key={i}>
@@ -61,6 +64,16 @@ class Problematics extends Component {
         <Container>
           <Row>
             <h1>Propuestas para mejorar la {this.state.name}</h1>
+            <Button
+                  color="danger"
+                  size="lg"
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fas fa-play" />
+                  Watch video
+            </Button>
           </Row>
           <Row>
             <Col>{card}</Col>
