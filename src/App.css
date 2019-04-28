@@ -61,3 +61,18 @@ body {
     left: 10%;
   }
 }
+ 
+.problemCards{
+  width: 90%;
+  height: 5px;
+  margin-left: 10%;
+  padding-top : 100px;
+}
+
+.CardContent-problematics{
+  height: 30px;
+}
+
+.options-problematics{
+  text-align: right
+}
