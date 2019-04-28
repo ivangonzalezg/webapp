@@ -24,19 +24,20 @@ class DetailedExpansionPanel extends React.Component {
         dislike: true,
         numDislike : Number,
         info: this.props.info,
-        comments : false,
+        comments : [],
         body: "",
         proposalId : this.props.info.id,
         currentyId: this.props.currentyId
     }
     componentWillMount(){
         const userName = localStorage.getItem("userId");
-        this.setState({
-            userName,
-            numLike : this.props.info.actions.like,
-            numDislike : this.props.info.actions.dislike,
-        })
-        console.log("info: ",this.props.info.actions.like)
+        this.setState({userName})
+        if(this.props.info.actions){
+            this.setState({
+                numLike : this.props.info.actions.like,
+                numDislike : this.props.info.actions.dislike,
+            })
+        }
         if(this.props.info.comments){
             const comments = this.props.info.comments;
             const datos = [{}];

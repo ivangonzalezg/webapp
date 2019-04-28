@@ -38,7 +38,7 @@ class Login extends Component {
             localStorage.setItem("userLocation", objectData.location);
             localStorage.setItem("userSocialId", objectData.socialId);
             this.setState({ loading: false });
-            window.location.pathname = "/";
+            window.location = document.referrer;
           });
         })
         .catch(error => {
@@ -103,7 +103,7 @@ class Login extends Component {
                 type="submit"
                 disabled={this.state.loading}
               >
-                Registrarse
+                Iniciar sesión
               </Button>
             </center>
           </Form>

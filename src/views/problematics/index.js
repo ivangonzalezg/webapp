@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import * as firebase from "firebase";
-import Button from '@material-ui/core/Button';
+import Target from './Target';
 import PlayCircleOutlined from '@material-ui/icons/PlayCircleOutline';
 
 
@@ -12,10 +12,14 @@ class Problematics extends Component {
         this.state = {
             currentyId: Number,
             data: [],
-            key : null
+            key: null,
+            name :"",
+            userName : false
         };
     }
     componentWillMount() {
+        const userName = localStorage.getItem("userId");
+        this.setState({userName})
         var database = firebase.database().ref();
         const currentyId = this.props.match.params.id;
         database
@@ -38,13 +42,20 @@ class Problematics extends Component {
                     currentyId
                 });
             });
+        database
+            .child("problems")
+            .once("value")
+            .then(data => {
+                const dbinfo = data.toJSON();
+                this.setState({ name: dbinfo["name" + currentyId] });
+            });
     }
 
     render() {
         var card = this.state.data.map((dato, i) => {
             return (
                 <div key={i}>
-                    <Target info={dato} currentyId={this.state.currentyId}/>
+                    <Target info={dato} currentyId={this.state.currentyId} />
                 </div>
             );
         });
@@ -52,18 +63,15 @@ class Problematics extends Component {
             <div>
                 <Container>
                     <Row>
-                        <h1>Propuestas para mejorar la {this.state.name}</h1>
+                        <h1>Propuestas para mejorar la {this.state.name === "" ? "..." : this.state.name}</h1>
                     </Row>
                     <Row>
                         <Button
                             color="danger"
                             size="lg"
-                            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={this.state.userName ? "/problematics/create/" + this.props.match.params.id: "/login"}
                         >
-                            <PlayCircleOutlined />
-                            Watch video
+                            Añadir propuesta
                         </Button>
                     </Row>
                     <Row></Row>
