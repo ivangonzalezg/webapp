@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
+import { Container } from "react-bootstrap";
 
 class Proposals extends Component {
   render() {
     return (
-      <div>
-        Elige la problemática
-        
-      </div>
-    )
+      <Container>
+        <center>
+          <h1>Administra las propuestas</h1>
+        </center>
+      </Container>
+    );
   }
 }
 
-export default Proposals
+export default Proposals;

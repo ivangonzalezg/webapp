@@ -40,6 +40,10 @@ class Home extends React.Component {
           });
         }
       });
+    database.child("counters").on("value", data => {
+      console.log(data.toJSON());
+      this.setState({ counters: data.toJSON() });
+    });
   }
 
   logout() {
@@ -59,6 +63,16 @@ class Home extends React.Component {
     const userName = localStorage.getItem("userName");
     const userSocialId = localStorage.getItem("userSocialId");
     const userLocation = localStorage.getItem("userLocation");
+    var registered = null;
+    var votes = null;
+    var proposals = null;
+    var comments = null;
+    if (this.state.counters) {
+      registered = this.state.counters.registered;
+      votes = this.state.counters.votes;
+      proposals = this.state.counters.proposals;
+      comments = this.state.counters.comments;
+    }
     return (
       <div>
         <div>
@@ -108,10 +122,13 @@ class Home extends React.Component {
         </div>
         <Container>
           <br />
+          <br />
+          <br />
           <center>
             <h1>Con tu ayuda transformaremos a Barranquilla</h1>
             <h3>¡Genera una propuesta de cambio!</h3>
           </center>
+          <br />
           <Row style={{ textAlign: "center", marginTop: "5%" }}>
             <Col>
               <a href="/problematics/1">
@@ -175,10 +192,12 @@ class Home extends React.Component {
               </div>
             </Col>
           </Row>
+          <br />
+          <br />
           <Row style={{ textAlign: "center", marginTop: "5%" }}>
             <Col>
               <h3>
-                <strong>{this.state.nofregisters || "0 +"}</strong>
+                <strong>{registered + " +" || "0 +"}</strong>
               </h3>
               <h3>
                 <small>Registros</small>
@@ -186,7 +205,7 @@ class Home extends React.Component {
             </Col>
             <Col>
               <h3>
-                <strong>{this.state.nofregisters || "0 +"}</strong>
+                <strong>{comments + " +" || "0 +"}</strong>
               </h3>
               <h3>
                 <small>Comentarios</small>
@@ -194,7 +213,7 @@ class Home extends React.Component {
             </Col>
             <Col>
               <h3>
-                <strong>{this.state.nofregisters || "0 +"}</strong>
+                <strong>{proposals + " +" || "0 +"}</strong>
               </h3>
               <h3>
                 <small>Propuestas recibidas</small>
@@ -202,13 +221,16 @@ class Home extends React.Component {
             </Col>
             <Col>
               <h3>
-                <strong>{this.state.nofregisters || "0 +"}</strong>
+                <strong>{votes + " +" || "0 +"}</strong>
               </h3>
               <h3>
                 <small>Votaciones</small>
               </h3>
             </Col>
           </Row>
+          <br />
+          <br />
+          <br />
         </Container>
       </div>
     );

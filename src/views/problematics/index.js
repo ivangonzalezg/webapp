@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import * as firebase from "firebase";
 
 class Problematics extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
-    this.state = {};
+    this.state = {
+      searching: true
+    };
   }
 
   componentWillMount() {
@@ -26,17 +28,73 @@ class Problematics extends Component {
       .child(currentyId)
       .once("value")
       .then(value => {
-        if (value.toJSON()) {
-          console.log(Object.keys(value.toJSON()).length);
+        const ObjectVal = value.toJSON();
+        if (ObjectVal) {
+          this.setState({ data: ObjectVal });
+        } else {
+          this.setState({ nodata: true });
         }
+        this.setState({ searching: false });
       });
   }
 
   render() {
+    const isSearching = this.state.searching;
+    var { data, currentyId, nodata } = this.state;
     return (
       <Container>
         <h1>Propuestas para mejorar la {this.state.name}</h1>
-        <Button href={this.state.link}>Haz una propuesta</Button>
+        <br />
+        <Button variant="success" href={this.state.link}>Haz una propuesta</Button>
+        <br />
+        <br />
+        <br />
+        {isSearching ? null : (
+          <div>
+            {nodata ? (
+              <div>
+                <h3>
+                  No hay propuestas para esta temática, postula una y sé el
+                  primero.
+                </h3>
+              </div>
+            ) : (
+              <div>
+                {Object.keys(data).map(function(key, index) {
+                  return (
+                    <div style={{ display: "inline", width: "100%" }}>
+                      <Card>
+                        <Row>
+                          <Col>
+                            <Card.Body>
+                              <Card.Title>{data[key].title}</Card.Title>
+                              <Card.Text>{data[key].body}</Card.Text>
+                              <Button
+                                href={"/problematics/" + currentyId + "/" + key}
+                              >
+                                Vota o comenta por esta propuesta
+                              </Button>
+                            </Card.Body>
+                          </Col>
+                          <Col>
+                            {data[key].url && (
+                              <img
+                                width="300px"
+                                alt={data[key].title}
+                                src={data[key].url}
+                              />
+                            )}
+                          </Col>
+                        </Row>
+                      </Card>
+                      <br />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
       </Container>
     );
   }

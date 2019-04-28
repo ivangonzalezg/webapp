@@ -10,7 +10,9 @@ class Proposals extends Component {
     this.state = {
       title: "",
       body: "",
-      name: ""
+      name: "",
+      proposalId:
+        localStorage.getItem("userId") + new Date().getTime().toString()
     };
   }
 
@@ -34,12 +36,13 @@ class Proposals extends Component {
 
   notSubmit(e) {
     e.preventDefault();
+    console.log(this.state);
   }
 
   update = () => {
     const currentyId = this.props.match.params.id;
     const userId = localStorage.getItem("userId");
-    const proposalId = userId + new Date().getTime().toString();
+    const { proposalId } = this.state;
     const { title, body } = this.state;
     var database = firebase.database().ref();
     database
@@ -55,6 +58,34 @@ class Proposals extends Component {
         console.log("Subido");
       });
     window.location.pathname = "/problematics/" + currentyId;
+  };
+
+  uploadImage = e => {
+    const { proposalId } = this.state;
+    const currentyId = this.props.match.params.id;
+    const image = e.target.files[0];
+    const database = firebase.database().ref();
+    const storage = firebase.storage().ref();
+    const task = storage
+      .child("problematics")
+      .child(currentyId)
+      .child(image.name);
+    task.put(image).on(
+      "state_changed",
+      () => {},
+      function(error) {},
+      async function() {
+        task.getDownloadURL().then(url => {
+          database
+            .child("proposals")
+            .child(currentyId)
+            .child(proposalId)
+            .update({
+              url
+            });
+        });
+      }
+    );
   };
 
   render() {

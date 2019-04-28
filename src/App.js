@@ -18,11 +18,6 @@ import "./App.css";
 
 export class App extends Component {
   render() {
-    const userId = localStorage.getItem("userId");
-    const userEmail = localStorage.getItem("userEmail");
-    const userName = localStorage.getItem("userName");
-    const userSocialId = localStorage.getItem("userSocialId");
-    const userLocation = localStorage.getItem("userLocation");
     return (
       <BrowserRouter>
         <div>
@@ -38,7 +33,7 @@ export class App extends Component {
               <Route path="/problematics/create/:id" component={CreateProposals} exact />
               <Route path="/problematics/:id" component={Problematic} exact />
               <Route path="/problematics/:id/:reference" component={Proposals} exact />
-              <Route path="/admin/proposals/:id" component={ProposalsAdmin} exact />
+              <Route path="/admin/proposals" component={ProposalsAdmin} exact />
               <Route path="/admin/problematics" component={ProblematicAdmin} exact />
               <Route component={NotFound} />
             </Switch>
