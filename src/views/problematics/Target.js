@@ -34,6 +34,9 @@ class DetailedExpansionPanel extends React.Component {
             .child(this.state.currentyId)
             .update(tempObject)
     };
+    onClick(){
+        console.log("onclick")
+    }
 
     render() {
         console.log("render", this.state.info)
@@ -107,7 +110,7 @@ class DetailedExpansionPanel extends React.Component {
                     </ExpansionPanelDetails>
                     <Divider />
                     <ExpansionPanelActions>
-                        <Button size="small" color="primary" >
+                        <Button size="small" color="primary" onClick={this.onClick()} >
                             Guardar
                         </Button>
                     </ExpansionPanelActions>
