@@ -52,7 +52,8 @@ class Proposals extends Component {
       .update({
         own: userId,
         title,
-        body
+        body,
+        actions : {like:0, dislike:0, comments: 0}
       })
       .then(() => {
         console.log("Subido");
