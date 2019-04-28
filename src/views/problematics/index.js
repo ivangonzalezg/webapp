@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import * as firebase from "firebase";
+import Sidebar from "../../components/sidebar";
 import Target from "./Target";
 
 class Problematics extends Component {
@@ -59,31 +60,38 @@ class Problematics extends Component {
     });
     return (
       <div>
-        <Container>
-          <Row>
-            <h1>
-              Propuestas para mejorar la{" "}
-              {this.state.name === "" ? "..." : this.state.name}
-            </h1>
-          </Row>
-          <Row>
-            <Button
-              color="danger"
-              size="lg"
-              href={
-                this.state.userName
-                  ? "/problematics/create/" + this.props.match.params.id
-                  : "/login"
-              }
-            >
-              Añadir propuesta
-            </Button>
-          </Row>
-          <Row />
-          <Row>
-            <Col>{card}</Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col sm="auto">
+            <Sidebar url="/problematics/" />
+          </Col>
+          <Col>
+            <Container>
+              <Row>
+                <h1>
+                  Propuestas para mejorar la{" "}
+                  {this.state.name === "" ? "..." : this.state.name}
+                </h1>
+              </Row>
+              <Row>
+                <Button
+                  color="danger"
+                  size="lg"
+                  href={
+                    this.state.userName
+                      ? "/problematics/create/" + this.props.match.params.id
+                      : "/login"
+                  }
+                >
+                  Añadir propuesta
+                </Button>
+              </Row>
+              <Row />
+              <Row>
+                <Col>{card}</Col>
+              </Row>
+            </Container>
+          </Col>
+        </Row>
       </div>
     );
   }
