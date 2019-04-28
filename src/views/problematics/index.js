@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import Target from './Card';
 import * as firebase from "firebase"
 
@@ -8,7 +8,7 @@ class Problematics extends Component {
         super(props)
 
         this.state = {
-            currentyId : Number,
+            currentyId: Number,
             data: [{}]
         };
     }
@@ -24,11 +24,17 @@ class Problematics extends Component {
             .once("value")
             .then(data => {
                 var datos = [];
+                const dbinfo = data.toJSON();
                 data.forEach(value => {
                     datos.push(value.val())
                 })
+                var i =0;
+                for (var key in dbinfo) {
+                    datos[i].id = key;
+                    i =+ 1;
+                }
                 this.setState({
-                    data : datos
+                    data: datos
                 })
             });
     }
@@ -36,17 +42,22 @@ class Problematics extends Component {
     render() {
         var card = this.state.data.map((dato, i) => {
             return (
-                <div>
-                    <Target info={dato} className="problemCards"/>
+                <div key={i}>
+                    <Target info={dato} className="problemCards" />
                 </div>
             )
-          })
+        })
         return (
             <div>
                 <Container>
-                    <Col >
-                        {card}
-                    </Col>
+                    <Row>
+                        <h1>{this.state.data[0].title}</h1>
+                    </Row>
+                    <Row>
+                        <Col >
+                            {card}
+                        </Col>
+                    </Row>
                 </Container>
             </div>
         );

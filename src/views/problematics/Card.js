@@ -30,14 +30,14 @@ function MediaCard(props) {
   }
   const { classes } = props;
   const { info } = props;
-  const link = "/problematics/2/" + info.own;
+  const link = "/problematics/2/" + info.id;
   return (
     <Card className={classes.card}>
       <a href={link}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={"https://image.shutterstock.com/image-illustration/problem-solution-business-concept-450w-165509396.jpg"}
+            image={info.image ? info.image : "https://ep01.epimg.net/internacional/imagenes/2018/07/23/billete_a_macondo/1532310440_143390_1532310884_noticia_normal_recorte1.jpg"}
             title={info.title}
           />
           <CardContent className="CardContent-problematics">
