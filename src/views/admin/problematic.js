@@ -4,8 +4,8 @@ import Input from "@material-ui/core/Input";
 import { Container, Form, Button, Card } from "react-bootstrap";
 
 class Problematic extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       name1: "",

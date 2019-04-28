@@ -35,8 +35,10 @@ class Login extends Component {
             localStorage.setItem("userId", event.user.uid);
             localStorage.setItem("userEmail", objectData.email);
             localStorage.setItem("userName", objectData.name);
-            console.log(objectData);
+            localStorage.setItem("userLocation", objectData.location);
+            localStorage.setItem("userSocialId", objectData.socialId);
             this.setState({ loading: false });
+            window.location.pathname = "/";
           });
         })
         .catch(error => {

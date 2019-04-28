@@ -3,17 +3,24 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Header from "./components/header";
 import NotFound from "./views/notFound";
 import Home from "./views/home/index";
-import Admin from "./views/admin";
 import Login from "./views/home/login";
-import Register from "./views/home/register";
-import Proposals from "./views/admin/proposals";
-import ProblematicAdmin from "./views/admin/problematic";
-import Problematic from "./views/problematics";
 import Footer from "./components/footer";
+import Register from "./views/home/register";
+import Problematic from "./views/problematics";
+import Proposals from "./views/problematics/proposals";
+import Prioritize from "./views/home/prioritize";
+import Admin from "./views/admin";
+import ProposalsAdmin from "./views/admin/proposals";
+import ProblematicAdmin from "./views/admin/problematic";
 import "./App.css";
 
 export class App extends Component {
   render() {
+    const userId = localStorage.getItem("userId");
+    const userEmail = localStorage.getItem("userEmail");
+    const userName = localStorage.getItem("userName");
+    const userSocialId = localStorage.getItem("userSocialId");
+    const userLocation = localStorage.getItem("userLocation");
     return (
       <BrowserRouter>
         <div>
@@ -22,15 +29,14 @@ export class App extends Component {
             <Switch>
               <Route path="/" component={Home} exact />
               <Route path="/admin" component={Admin} exact />
+              <Route path="/survey" component={Prioritize} exact />
               <Route path="/login" component={Login} exact />
               <Route path="/register" component={Register} exact />
               <Route path="/problematics/:id" component={Problematic} exact />
-              <Route
-                path="/admin/problematics"
-                component={ProblematicAdmin}
-                exact
-              />
-              <Route path="/admin/proposals/:id" component={Proposals} exact />
+              <Route path="/admin/proposals/:id" component={ProposalsAdmin} exact />
+              <Route path="/admin/problematics" component={ProblematicAdmin} exact />
+              {userEmail && userId && userName && userSocialId && userLocation &&
+              <Route path="/problematics/:id/create" component={Proposals} exact />}
               <Route component={NotFound} />
             </Switch>
           </div>

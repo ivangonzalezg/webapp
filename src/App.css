@@ -61,3 +61,16 @@ body {
     left: 10%;
   }
 }
+
+.arrow-survey {
+  position: relative;
+  float: right;
+  background-color: white;
+  border-radius: 50%;
+  margin-left: 1%;
+}
+
+.arrow-survey:hover {
+  cursor: pointer;
+  background-color: rgba(128, 128, 128, 0.7);
+}
