@@ -42,6 +42,9 @@ class Proposals extends Component {
   update = () => {
     const currentyId = this.props.match.params.id;
     const userId = localStorage.getItem("userId");
+    if (!userId) {
+      return (window.location.pathname = "/login");
+    }
     const { proposalId } = this.state;
     const { title, body } = this.state;
     var database = firebase.database().ref();
@@ -55,9 +58,20 @@ class Proposals extends Component {
         body
       })
       .then(() => {
-        console.log("Subido");
+        const counters = firebase
+          .database()
+          .ref()
+          .child("counters");
+        counters
+          .child("proposals")
+          .once("value")
+          .then(data => {
+            counters.update({ proposals: data.val() + 1 }).then(() => {
+              window.location.pathname = "/problematics/" + currentyId;
+              this.setState({ loading: false });
+            });
+          });
       });
-    window.location.pathname = "/problematics/" + currentyId;
   };
 
   uploadImage = e => {

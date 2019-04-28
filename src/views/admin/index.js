@@ -1,15 +1,26 @@
 import React, { Component } from "react";
+import { Container } from "react-bootstrap";
 
 class Admin extends Component {
   render() {
     return (
-      <div>
-        admin page Hello
+      <Container>
+        <h1>Bienvenido Admin</h1>
         <br />
-        <a href="/admin/problematics">Actualiza las problemáticas</a>
         <br />
-        <a href="admin/proposals/1">Administras las propuestas</a>
-      </div>
+        <br />
+        <h2>Opciones: </h2>
+        <br />
+        <br />
+        <br />
+        <h4 style={{ paddingLeft: "7%" }}>
+          <a href="/admin/problematics">Actualizar problemáticas</a>
+        </h4>
+        <br />
+        <h4 style={{ paddingLeft: "7%" }}>
+          <a href="admin/proposals/1">Administras las propuestas</a>
+        </h4>
+      </Container>
     );
   }
 }
