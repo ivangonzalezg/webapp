@@ -138,7 +138,8 @@ body {
 
 
 .classes-root{
-  width: '100%',
+  width: '100%';
+  padding: '100px';
 }
 .classes-icon{
   height: 20;
