@@ -20,13 +20,25 @@ class Footer extends Component {
               </h5>
             </Row>
             <Row>
-              <a href="http://camarabaq.org.co/">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="http://camarabaq.org.co/"
+              >
                 <img src={Camara} width="60px" alt="Twitter logo" />
               </a>
-              <a href="https://uninorte.edu.co">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://uninorte.edu.co"
+              >
                 <img src={Uninorte} width="60px" alt="Twitter logo" />
               </a>
-              <a href="https://nativapps.com">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://nativapps.com"
+              >
                 <img src={Nativapps} width="60px" alt="Twitter logo" />
               </a>
             </Row>

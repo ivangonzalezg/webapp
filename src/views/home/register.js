@@ -82,8 +82,19 @@ class Register extends Component {
               location
             })
             .then(() => {
-              window.location.pathname = "/survey";
-              this.setState({ loading: false });
+              const counters = firebase
+                .database()
+                .ref()
+                .child("counters");
+              counters
+                .child("registered")
+                .once("value")
+                .then(data => {
+                  counters.update({ registered: data.val() + 1 }).then(() => {
+                    window.location.pathname = "/survey";
+                    this.setState({ loading: false });
+                  });
+                });
             });
         })
         .catch(error => {

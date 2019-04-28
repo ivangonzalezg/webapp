@@ -6,9 +6,9 @@ class Admin extends Component {
       <div>
         admin page Hello
         <br />
-        <a href="/admin/problematics">Actualiza las problematicas</a>
+        <a href="/admin/problematics">Actualiza las problemáticas</a>
         <br />
-        <a href="admin/proposals">Administras las propuestas</a>
+        <a href="admin/proposals/1">Administras las propuestas</a>
       </div>
     );
   }

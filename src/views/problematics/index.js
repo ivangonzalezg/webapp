@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import Target from "./Target";
+import { Container, Button, Card, Row, Col } from "react-bootstrap";
 import * as firebase from "firebase";
 import Button from '@material-ui/core/Button';
 import PlayCircleOutlined from '@material-ui/icons/PlayCircleOutline';

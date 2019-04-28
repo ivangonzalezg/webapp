@@ -82,11 +82,11 @@ class Problematic extends Component {
     return (
       <Container>
         <center>
-          <h1>Actualiza las problematicas</h1>
+          <h1>Actualiza las problemáticas</h1>
         </center>
         <br />
         <Form onSubmit={e => this.notSubmit(e)}>
-          <Card.Title>Problemático #1</Card.Title>
+          <Card.Title>Problemática #1</Card.Title>
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -110,7 +110,7 @@ class Problematic extends Component {
           <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image1" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
-          <Card.Title>Problemático #2</Card.Title>
+          <Card.Title>Problemática #2</Card.Title>
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -134,7 +134,7 @@ class Problematic extends Component {
           <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image2" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
-          <Card.Title>Problemático #3</Card.Title>
+          <Card.Title>Problemática #3</Card.Title>
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -158,7 +158,7 @@ class Problematic extends Component {
           <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image3" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
-          <Card.Title>Problemático #4</Card.Title>
+          <Card.Title>Problemática #4</Card.Title>
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -182,7 +182,7 @@ class Problematic extends Component {
           <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image4" onChange={this.uploadImage} />
           <hr className="hr-admin" />
 
-          <Card.Title>Problemático #5</Card.Title>
+          <Card.Title>Problemática #5</Card.Title>
           <Form.Group>
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -205,7 +205,7 @@ class Problematic extends Component {
           </Form.Group>
           <Input type="file" className="file-admin" inputProps={{accept:"image/*"}} id="image5" onChange={this.uploadImage} />
           <hr className="hr-admin" style={{visibility: "hidden"}} />
-          <Button variant="success" type="submit" onClick={this.update}>
+          <Button variant="success" onClick={this.update}>
             Subir cambios
           </Button>
         </Form>

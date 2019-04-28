@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Navbar, ButtonGroup, Button } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 
 class Header extends Component {
   constructor(props) {
@@ -25,29 +25,47 @@ class Header extends Component {
     const userLocation = localStorage.getItem("userLocation");
     return (
       <div>
-        {userEmail && userId && userName && userSocialId && userLocation ? (
+        {window.location.pathname !== "/" ? (
           <div>
-            <span>Bienvenido {userName} </span>
-            <Button onClick={this.logout} variant="light">
-              Cerrar sesión
-            </Button>
+            {userEmail && userId && userName && userSocialId && userLocation ? (
+              <Nav className="justify-content-end">
+                <Nav.Item>
+                  <Nav.Link className="welcome-header-others">
+                    Bienvenido {userName}
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/" className="logout-header-others">
+                    Inicio
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link
+                    onClick={this.logout}
+                    className="logout-header-others"
+                  >
+                    Cerrar sesión
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+            ) : (
+              <Nav className="justify-content-end header">
+                <Nav.Item>
+                  <Nav.Link href="/">Inicio</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/aboutus">Nosotros</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/login">Iniciar sesión</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/register">Registrarse</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            )}
           </div>
-        ) : (
-          <Nav className="header">
-            <Nav.Item>
-              <Nav.Link href="/">Inicio</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/aboutus">Nosotros</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/login">Iniciar sesión</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/register">Registrarse</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        )}
+        ) : null}
       </div>
     );
   }
