@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Nav, Navbar, ButtonGroup, Button } from "react-bootstrap";
+import { Nav, Button } from "react-bootstrap";
 
 class Header extends Component {
   constructor(props) {
@@ -25,6 +25,9 @@ class Header extends Component {
     const userLocation = localStorage.getItem("userLocation");
     return (
       <div>
+        {window.location.pathname !== "/"? 
+        <div>
+
         {userEmail && userId && userName && userSocialId && userLocation ? (
           <div>
             <span>Bienvenido {userName} </span>
@@ -33,7 +36,7 @@ class Header extends Component {
             </Button>
           </div>
         ) : (
-          <Nav className="header">
+          <Nav className="justify-content-end header">
             <Nav.Item>
               <Nav.Link href="/">Inicio</Nav.Link>
             </Nav.Item>
@@ -48,6 +51,8 @@ class Header extends Component {
             </Nav.Item>
           </Nav>
         )}
+        </div>
+        : null}
       </div>
     );
   }

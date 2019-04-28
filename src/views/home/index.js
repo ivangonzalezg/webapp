@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Nav } from "react-bootstrap";
 import MainImage from "../../img/amanecera.jpg";
 import * as firebase from "firebase";
 
@@ -42,11 +42,56 @@ class Home extends React.Component {
       });
   }
 
+  logout() {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userSocialId");
+    localStorage.removeItem("userLocation");
+    window.location.reload();
+  }
+
   render() {
     var { name1, name2, name3, name4, name5 } = this.state;
     var { image1, image2, image3, image4, image5 } = this.state;
+    const userId = localStorage.getItem("userId");
+    const userEmail = localStorage.getItem("userEmail");
+    const userName = localStorage.getItem("userName");
+    const userSocialId = localStorage.getItem("userSocialId");
+    const userLocation = localStorage.getItem("userLocation");
     return (
       <div>
+        <div>
+          {userEmail && userId && userName && userSocialId && userLocation ? (
+            <Nav className="header-home-login">
+              <Nav.Item>
+                <Nav.Link className="welcome-header">
+                  Bienvenido {userName}
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link onClick={this.logout} className="logout-header">
+                  Cerrar sesión
+                </Nav.Link>
+              </Nav.Item>
+            </Nav>
+          ) : (
+            <Nav className="header-home">
+              <Nav.Item>
+                <Nav.Link href="/">Inicio</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/aboutus">Nosotros</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/login">Iniciar sesión</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/register">Registrarse</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          )}
+        </div>
         <div className="image-color">
           <div className="image-text">
             Haz parte del
@@ -59,7 +104,8 @@ class Home extends React.Component {
         <Container>
           <br />
           <center>
-            <h1>IMAGINA TÚ CIUDÁ</h1>
+            <h1>Con tu ayuda transformaremos a Barranquilla</h1>
+            <h3>¡Genera una propuesta de cambio!</h3>
           </center>
           <Row style={{ textAlign: "center", marginTop: "5%" }}>
             <Col>
@@ -71,6 +117,7 @@ class Home extends React.Component {
                   title={name1}
                 />
               </a>
+              {name1.toUpperCase()}
             </Col>
             <Col>
               <a href="/problematics/2">
@@ -81,6 +128,7 @@ class Home extends React.Component {
                   title={name2}
                 />
               </a>
+              {name2.toUpperCase()}
             </Col>
             <Col>
               <a href="/problematics/3">
@@ -91,28 +139,35 @@ class Home extends React.Component {
                   title={name3}
                 />
               </a>
+              {name3.toUpperCase()}
             </Col>
           </Row>
           <Row style={{ textAlign: "center" }}>
             <Col>
-              <a href="/problematics/4">
-                <img
-                  className="image-home four"
-                  src={image4}
-                  alt={name4}
-                  title={name4}
-                />
-              </a>
+              <div className="four">
+                <a href="/problematics/4">
+                  <img
+                    className="image-home"
+                    src={image4}
+                    alt={name4}
+                    title={name4}
+                  />
+                </a>
+                {name4.toUpperCase()}
+              </div>
             </Col>
             <Col>
-              <a href="/problematics/5">
-                <img
-                  className="image-home five"
-                  src={image5}
-                  alt={name5}
-                  title={name5}
-                />
-              </a>
+              <div className="five">
+                <a href="/problematics/5">
+                  <img
+                    className="image-home"
+                    src={image5}
+                    alt={name5}
+                    title={name5}
+                  />
+                </a>
+                {name5.toUpperCase()}
+              </div>
             </Col>
           </Row>
           <Row style={{ textAlign: "center", marginTop: "5%" }}>
