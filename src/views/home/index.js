@@ -139,7 +139,7 @@ class Home extends React.Component {
                   title={name1}
                 />
               </a>
-              {name1.toUpperCase()}
+              <div><strong>{name1.toUpperCase()}</strong></div>
             </Col>
             <Col>
               <a href="/problematics/2">
@@ -150,7 +150,7 @@ class Home extends React.Component {
                   title={name2}
                 />
               </a>
-              {name2.toUpperCase()}
+              <div><strong>{name2.toUpperCase()}</strong></div>
             </Col>
             <Col>
               <a href="/problematics/3">
@@ -161,7 +161,7 @@ class Home extends React.Component {
                   title={name3}
                 />
               </a>
-              {name3.toUpperCase()}
+              <div><strong>{name3.toUpperCase()}</strong></div>
             </Col>
           </Row>
           <Row style={{ textAlign: "center" }}>
@@ -175,7 +175,7 @@ class Home extends React.Component {
                     title={name4}
                   />
                 </a>
-                {name4.toUpperCase()}
+                <div><strong>{name4.toUpperCase()}</strong></div>
               </div>
             </Col>
             <Col>
@@ -188,7 +188,7 @@ class Home extends React.Component {
                     title={name5}
                   />
                 </a>
-                {name5.toUpperCase()}
+                <div><strong>{name5.toUpperCase()}</strong></div>
               </div>
             </Col>
           </Row>

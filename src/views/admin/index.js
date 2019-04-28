@@ -8,7 +8,7 @@ class Admin extends Component {
         <br />
         <a href="/admin/problematics">Actualiza las problemáticas</a>
         <br />
-        <a href="admin/proposals">Administras las propuestas</a>
+        <a href="admin/proposals/1">Administras las propuestas</a>
       </div>
     );
   }
