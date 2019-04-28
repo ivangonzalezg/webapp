@@ -40,7 +40,7 @@ function MediaCard(props) {
             image={info.image ? info.image : "https://ep01.epimg.net/internacional/imagenes/2018/07/23/billete_a_macondo/1532310440_143390_1532310884_noticia_normal_recorte1.jpg"}
             title={info.title}
           />
-          <CardContent className="CardContent-problematics">
+          <CardContent>
             <Typography component="p">
               {info.title}
             </Typography>

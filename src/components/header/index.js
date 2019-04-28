@@ -45,13 +45,16 @@ class Header extends Component {
           </Nav>
           {userEmail && userId && userName && userSocialId && userLocation ? (
             <div>
-              <span>Bienvenido {userName} {" "}</span>
+              <span>Bienvenido {userName} </span>
               <Button onClick={this.logout} variant="light">
                 Cerrar sesión
               </Button>
             </div>
           ) : (
             <ButtonGroup>
+              <Button href="/aboutus" variant="light">
+                Nosotros
+              </Button>
               <Button href="/login" variant="light">
                 Iniciar sesión
               </Button>

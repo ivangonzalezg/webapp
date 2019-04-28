@@ -51,8 +51,12 @@ body {
   left: 20%;
 }
 
-.container-problematics {
-  padding-top: 2%;
+.image-home {
+  text-align: center;
+  width: 12vw;
+  height: 22vh;
+  border-radius: 50%;
+  border: solid 1px #2baff1;
 }
 
 @media (max-width: 768px) {
@@ -60,32 +64,4 @@ body {
     width: 80%;
     left: 10%;
   }
-}
- 
-.problemCards{
-  width: 90%;
-  height: 5px;
-  margin-left: 10%;
-  padding-top : 100px;
-}
-
-.CardContent-problematics{
-  height: 30px;
-}
-
-.options-problematics{
-  text-align: right
-}
-
-.arrow-survey {
-  position: relative;
-  float: right;
-  background-color: white;
-  border-radius: 50%;
-  margin-left: 1%;
-}
-
-.arrow-survey:hover {
-  cursor: pointer;
-  background-color: rgba(128, 128, 128, 0.7);
 }
