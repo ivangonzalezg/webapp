@@ -23,7 +23,7 @@ function MediaCard(props) {
   const { info } = props;  
   return (
     <Card className={classes.card}>
-    <a href={"/"+info.name.toLowerCase()}>
+    <a href={"/problematics/"+info.id}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
