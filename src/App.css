@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+
 html,
 body {
   margin: 0;
@@ -7,11 +9,11 @@ body {
 }
 
 .container-app {
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 140px);
 }
 
 .footer-app {
-  height: 35px;
+  height: auto;
 }
 
 @media (max-width: 768px) {
@@ -29,14 +31,6 @@ body {
   border: solid 1px;
 }
 
-.row2 {
-  padding-top: 20px;
-}
-.conta {
-  margin-top: 10px;
-  border: 10px;
-}
-
 .file-admin {
   width: 100%;
 }
@@ -51,12 +45,85 @@ body {
   left: 20%;
 }
 
+.main-image {
+  width: 100%;
+}
+
+.image-color img {
+  background-color: rgba(72, 200, 83, 0.2);
+  opacity: 0.9;
+  border-radius: 5px;
+  box-shadow: 0 20px 20px -15px #333;
+}
+
+.image-text {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  font-family: "IQuicksand";
+  font-size: 3vw;
+  z-index: 1;
+  color: white;
+  text-shadow: 4px 4px rgb(90, 90, 90);
+}
+
+.image-text span {
+  display: block;
+  font-size: 7vw;
+}
+
 .image-home {
   text-align: center;
-  width: 12vw;
-  height: 22vh;
+  width: 15vw;
+  height: 30vh;
   border-radius: 50%;
   border: solid 1px #2baff1;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  transition: box-shadow width height 500ms;
+}
+
+.image-home:hover {
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.5);
+}
+
+.four {
+  position: relative;
+  left: 7vw;
+}
+
+.five {
+  position: relative;
+  right: 7vw;
+}
+
+.vl {
+  border-left: 1px solid rgb(233, 233, 11);
+  height: 100px;
+}
+
+/*.hr-home {
+  border: none;
+  width: 98%;
+  height: 50px;
+  border-bottom: 1px solid #1f1209;
+  box-shadow: 0 20px 20px -15px #333;
+  margin: -50px auto 10px;
+}*/
+
+.header {
+  position: absolute;
+  right: 0;
+  z-index: 1;
+}
+
+.header a {
+  color: white !important;
+  font-size: 18px;
+}
+
+.header a:hover {
+  color: grey !important;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {

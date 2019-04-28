@@ -24,47 +24,31 @@ class Header extends Component {
     const userSocialId = localStorage.getItem("userSocialId");
     const userLocation = localStorage.getItem("userLocation");
     return (
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="/">Imagina tu ciudá</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            {/*<Nav.Link href="/problematics">Problemáticas</Nav.Link>
-            <NavDropdown title="Información" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/aboutus">
-                Sobre nosotros
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/terms">
-                Terminos y condiciones
-              </NavDropdown.Item>
-              <NavDropdown.Item href="/privacy">
-                Politicas de privacidad
-              </NavDropdown.Item>
-            </NavDropdown>
-            */}
+      <div>
+        {userEmail && userId && userName && userSocialId && userLocation ? (
+          <div>
+            <span>Bienvenido {userName} </span>
+            <Button onClick={this.logout} variant="light">
+              Cerrar sesión
+            </Button>
+          </div>
+        ) : (
+          <Nav className="header">
+            <Nav.Item>
+              <Nav.Link href="/">Inicio</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/aboutus">Nosotros</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/login">Iniciar sesión</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link href="/register">Registrarse</Nav.Link>
+            </Nav.Item>
           </Nav>
-          {userEmail && userId && userName && userSocialId && userLocation ? (
-            <div>
-              <span>Bienvenido {userName} </span>
-              <Button onClick={this.logout} variant="light">
-                Cerrar sesión
-              </Button>
-            </div>
-          ) : (
-            <ButtonGroup>
-              <Button href="/aboutus" variant="light">
-                Nosotros
-              </Button>
-              <Button href="/login" variant="light">
-                Iniciar sesión
-              </Button>
-              <Button href="/register" variant="light">
-                Registrarse
-              </Button>
-            </ButtonGroup>
-          )}
-        </Navbar.Collapse>
-      </Navbar>
+        )}
+      </div>
     );
   }
 }
